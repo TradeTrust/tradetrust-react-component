@@ -1,0 +1,24 @@
+import { Meta, Preview, Props, Description, Story } from "@storybook/addon-docs/blocks";
+import JsonSchemaForm from "./jsonSchemaForm";
+import {data} from "./sample";
+
+<Meta title="MDX|JsonSchemaForm" component={JsonSchemaForm} />
+
+# JsonSchemaForm component
+
+<Description of={JsonSchemaForm} />
+
+# Props
+
+<Props of={JsonSchemaForm} />
+
+# Usage
+
+With `MDX` we can define a story for `JsonSchemaForm` right in the middle of our
+markdown documentation.
+
+<Preview>
+  <Story name="with initial value">
+    <JsonSchemaForm formData={data} />
+  </Story>
+</Preview>
