@@ -1,57 +1,87 @@
-import React, { useState, FunctionComponent } from "react";
-import styled from "@emotion/styled";
-import { getLogger } from "../logger";
-const { trace } = getLogger("Counter");
+import React, { useState } from "react";
+import JsonForm from "react-jsonschema-form";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-interface CounterProps {
-  /** Initial counter value */
-  initialValue?: number;
-}
+export const seperateUiSchema = (obj: any, schemaObj = {}) => {
+  let uiSchema: any = schemaObj;
+  Object.keys(obj).forEach(key => {
+    if (typeof obj[key] === "object" && obj[key] !== null) {
+      uiSchema[key] = {};
+      if (obj[key].ui) {
+        uiSchema[key] = obj[key].ui;
+      }
+      if (obj[key].properties) {
+        seperateUiSchema(obj[key].properties, uiSchema[key]);
+      }
+    }
+  });
+  return uiSchema;
+};
 
-const StyledButton = styled.button`
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  cursor: pointer;
-  margin: 1px;
-`;
-/**
- * Use `Counter` to embed a simple counter into your awesome application. It provides 2 buttons to increment / decrement counter value as well as an initial optional value.
- */
-export const Counter: FunctionComponent<CounterProps> = ({ initialValue = 0 }) => {
-  const [counter, setCounter] = useState(initialValue);
+const JsonSchemaForm = (props:any) => {
+  const [activeTab, setActiveTab] = useState(0);
+  const jsonFormRef:any = [];
+  const onSubmit = ({ formData }: any) => console.log("Data submitted: ", formData);
+
+  const renderTabBar = (jsonForms: any) => (
+    <nav>
+      <div className="nav nav-tabs">
+        {jsonForms.map((form: any, idx: number) => (
+          <a
+            key={idx}
+            className={`nav-item nav-link ${activeTab === idx ? "active" : ""}`}
+            onClick={() => setActiveTab(idx)}
+          >
+            {form.name}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+
+  const renderJsonForm = (jsonForms: any) => (
+    <>
+      {jsonForms.map((form: any, idx: number) => {
+        const uiSchema = seperateUiSchema(form.schema.properties);
+        return (
+          <div
+            key={form.id}
+            id={form.id}
+            className={`tab-pane p-3 bg-white ${
+              activeTab === idx ? "d-block active" : "d-none"
+            }`}
+          >
+            <JsonForm
+              schema={form.schema}
+              uiSchema={uiSchema}
+              onSubmit={onSubmit}
+              ref={jf => {
+                jsonFormRef[idx] = jf;
+              }}
+            >
+              <div className="text-center">
+                <button
+                  type="button"
+                  className="btn btn-primary w-50"
+                  onClick={() => jsonFormRef[idx].submit()}
+                >
+                  Issue
+                </button>
+              </div>
+            </JsonForm>
+          </div>
+        );
+      })}
+    </>
+  );
+
   return (
-    <div css={{ textAlign: "center" }}>
-      <h1>Counter: {counter}</h1>
-      <StyledButton
-        onClick={() => {
-          trace("Increment the counter by 1");
-          setCounter(counter => counter + 1);
-        }}
-      >
-        Increment
-      </StyledButton>
-      <StyledButton
-        onClick={() => {
-          trace("Decrement the counter by 1");
-          setCounter(counter => counter - 1);
-        }}
-      >
-        Decrement
-      </StyledButton>
-    </div>
+    <>
+      {renderTabBar(props.formData)}
+      {renderJsonForm(props.formData)}
+    </>
   );
 };
+
+export default JsonSchemaForm;

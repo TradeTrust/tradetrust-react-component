@@ -1,31 +1,24 @@
 import { Meta, Preview, Props, Description, Story } from "@storybook/addon-docs/blocks";
-import { Counter } from "./Counter";
+import JsonSchemaForm from "./Counter";
+import {data} from "./sample";
 
-<Meta title="MDX|Counter" component={Counter} />
+<Meta title="MDX|JsonSchemaForm" component={JsonSchemaForm} />
 
-# Counter component
+# JsonSchemaForm component
 
-<Description of={Counter} />
+<Description of={JsonSchemaForm} />
 
 # Props
 
-<Props of={Counter} />
+<Props of={JsonSchemaForm} />
 
 # Usage
 
-With `MDX` we can define a story for `Counter` right in the middle of our
+With `MDX` we can define a story for `JsonSchemaForm` right in the middle of our
 markdown documentation.
-
-<Preview withSource>
-  <Story name="basic example">
-    <Counter />
-  </Story>
-</Preview>
-
-We can also add more detailed usage on our component. For instance this awesome counter accept an initial value
 
 <Preview>
   <Story name="with initial value">
-    <Counter initialValue={10} />
+    <JsonSchemaForm formData={data} />
   </Story>
 </Preview>
