@@ -4,7 +4,7 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export const seperateUiSchema = (obj: any, schemaObj = {}) => {
-  let uiSchema: any = schemaObj;
+  const uiSchema: any = schemaObj;
   Object.keys(obj).forEach(key => {
     if (typeof obj[key] === "object" && obj[key] !== null) {
       uiSchema[key] = {};
@@ -19,9 +19,9 @@ export const seperateUiSchema = (obj: any, schemaObj = {}) => {
   return uiSchema;
 };
 
-const JsonSchemaForm = (props:any) => {
+const JsonSchemaForm = (props: any) => {
   const [activeTab, setActiveTab] = useState(0);
-  const jsonFormRef:any = [];
+  const jsonFormRef: any = [];
   const onSubmit = ({ formData }: any) => console.log("Data submitted: ", formData);
 
   const renderTabBar = (jsonForms: any) => (
@@ -48,9 +48,7 @@ const JsonSchemaForm = (props:any) => {
           <div
             key={form.id}
             id={form.id}
-            className={`tab-pane p-3 bg-white ${
-              activeTab === idx ? "d-block active" : "d-none"
-            }`}
+            className={`tab-pane p-3 bg-white ${activeTab === idx ? "d-block active" : "d-none"}`}
           >
             <JsonForm
               schema={form.schema}
@@ -61,11 +59,7 @@ const JsonSchemaForm = (props:any) => {
               }}
             >
               <div className="text-center">
-                <button
-                  type="button"
-                  className="btn btn-primary w-50"
-                  onClick={() => jsonFormRef[idx].submit()}
-                >
+                <button type="button" className="btn btn-primary w-50" onClick={() => jsonFormRef[idx].submit()}>
                   Issue
                 </button>
               </div>
