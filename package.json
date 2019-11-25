@@ -1,6 +1,9 @@
 {
   "name": "@govtechsg/tradetrust-react-component",
   "version": "0.0.0-development",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "dependencies": {
