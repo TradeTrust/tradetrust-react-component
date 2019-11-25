@@ -13,6 +13,6 @@ npm i @govtechsg/tradetrust-react-component
 ```
 import {JsonSchemaForm} from "@govtechsg/tradetrust-react-component"
 
-<JsonSchemaForm formDat={<array of schemas>} onSubmit={() => console.log("submit")} />
+<JsonSchemaForm formData={<array of schemas>} onSubmit={() => console.log("submit")} />
 
 ```
