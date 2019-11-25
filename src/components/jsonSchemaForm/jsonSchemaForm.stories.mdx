@@ -1,7 +1,7 @@
 import { Meta, Preview, Props, Description, Story } from "@storybook/addon-docs/blocks";
 import { object } from "@storybook/addon-knobs";
 import { JsonSchemaForm } from "./";
-import { data } from "./sample";
+import { schema, data } from "./sample";
 
 <Meta title="MDX|JsonSchemaForm" component={JsonSchemaForm} />
 
@@ -20,6 +20,6 @@ markdown documentation.
 
 <Preview>
   <Story name="with initial value">
-    <JsonSchemaForm formData={object("formData", data)} onSubmit={() => console.log("submit")} />
+    <JsonSchemaForm formSchema={object("formSchema", schema)} onSubmit={() => console.log("submit")} />
   </Story>
 </Preview>

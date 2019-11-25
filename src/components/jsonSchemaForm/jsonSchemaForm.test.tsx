@@ -1,7 +1,7 @@
 import React from "react";
 import { JsonSchemaForm } from "./";
 import { render, fireEvent, queryByAttribute } from "@testing-library/react";
-import { data } from "./sample";
+import { schema } from "./sample";
 
 const getById = queryByAttribute.bind(null, "id");
 const onSubmit = (formdata: any): any => formdata;
@@ -13,14 +13,14 @@ describe("jsonSchemaForm component", () => {
   });
   it("should render the form correctly", () => {
     const formSubmit = jest.fn();
-    const { getByText } = render(<JsonSchemaForm formData={data} onSubmit={formSubmit} />);
+    const { getByText } = render(<JsonSchemaForm formSchema={schema} onSubmit={formSubmit} />);
     expect(getByText("Template Renderer")).toBeDefined();
     expect(getByText("Packages")).toBeDefined();
   });
 
   it("should call the onsubmit function on issue button click", () => {
     const formSubmit = jest.fn();
-    const { getByText, container } = render(<JsonSchemaForm formData={data} onSubmit={formSubmit} />);
+    const { getByText, container } = render(<JsonSchemaForm formSchema={schema} onSubmit={formSubmit} />);
     expect(getByText("Template Renderer")).toBeDefined();
     expect(getByText("Packages")).toBeDefined();
     const idInput: any = getById(container, "root_id");
@@ -35,7 +35,7 @@ describe("jsonSchemaForm component", () => {
   });
 
   it("should throw error when submit form without required fields", () => {
-    const { getByText } = render(<JsonSchemaForm formData={data} onSubmit={formData => onSubmit(formData)} />);
+    const { getByText } = render(<JsonSchemaForm formSchema={schema} onSubmit={formData => onSubmit(formData)} />);
     expect(getByText("Template Renderer")).toBeDefined();
     expect(getByText("Packages")).toBeDefined();
     fireEvent.click(getByText(/Issue Document/i));

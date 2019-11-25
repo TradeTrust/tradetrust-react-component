@@ -5,7 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 interface JsonFormProps {
-  formData: object[];
+  formData?: object[];
+  formSchema: object[];
   onSubmit: ({ data }: any) => void;
 }
 
@@ -14,10 +15,10 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
   const jsonFormRef: any = [];
   const onSubmit = ({ formData }: any): void => props.onSubmit(formData);
 
-  const renderTabBar = (jsonForms: any): ReactElement => (
+  const renderTabBar = ({ formSchema}: {formSchema: object[]} ): ReactElement => (
     <nav>
       <div className="nav nav-tabs">
-        {jsonForms.map((form: any, idx: number) => (
+        {formSchema.map((form: any, idx: number) => (
           <a
             key={idx}
             className={`nav-item nav-link ${activeTab === idx ? "active" : ""}`}
@@ -30,9 +31,9 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
     </nav>
   );
 
-  const renderJsonForm = (jsonForms: any): ReactElement => (
+  const renderJsonForm = ({ formSchema, formData = []}: {formSchema: object[], formData?: object[]}): ReactElement => (
     <>
-      {jsonForms.map((form: any, idx: number) => {
+      {formSchema.map((form: any, idx: number) => {
         const uiSchema = seperateUiSchema(form.schema.properties);
         return (
           <div
@@ -44,6 +45,7 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
               schema={form.schema}
               uiSchema={uiSchema}
               onSubmit={onSubmit}
+              formData={[{id: 123}]}
               ref={jf => {
                 jsonFormRef[idx] = jf;
               }}
@@ -62,8 +64,8 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
 
   return (
     <>
-      {renderTabBar(props.formData)}
-      {renderJsonForm(props.formData)}
+      {renderTabBar(props)}
+      {renderJsonForm(props)}
     </>
   );
 };

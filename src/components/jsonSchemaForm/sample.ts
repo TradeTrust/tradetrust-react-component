@@ -1,4 +1,4 @@
-export const data = [
+export const schema = [
   {
     id: "xyz",
     name: "DEMO CNM",
@@ -192,3 +192,23 @@ export const data = [
     }
   }
 ];
+
+
+export const data = [
+  {
+    id: 123,
+    name: "Demo Document",
+    $template: {
+      name: "Demo Template",
+      url: "https://demo.com"
+    },
+    issuers: [{
+      name: "Govtech",
+      documentStore: "0x48399Fb88bcD031C556F53e93F690EEC07963Af3",
+      identityProof: {
+        type: "DNS-TXT",
+        location: "demo-renderer.govtech.com"
+      }
+    }]
+  }
+]
