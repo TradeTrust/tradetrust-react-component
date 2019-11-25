@@ -15,7 +15,7 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
   const jsonFormRef: any = [];
   const onSubmit = ({ formData }: any): void => props.onSubmit(formData);
 
-  const renderTabBar = ({ formSchema}: {formSchema: object[]} ): ReactElement => (
+  const renderTabBar = ({ formSchema }: { formSchema: object[] }): ReactElement => (
     <nav>
       <div className="nav nav-tabs">
         {formSchema.map((form: any, idx: number) => (
@@ -31,7 +31,13 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
     </nav>
   );
 
-  const renderJsonForm = ({ formSchema, formData = []}: {formSchema: object[], formData?: object[]}): ReactElement => (
+  const renderJsonForm = ({
+    formSchema,
+    formData = []
+  }: {
+    formSchema: object[];
+    formData?: object[];
+  }): ReactElement => (
     <>
       {formSchema.map((form: any, idx: number) => {
         const uiSchema = seperateUiSchema(form.schema.properties);
@@ -45,7 +51,7 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
               schema={form.schema}
               uiSchema={uiSchema}
               onSubmit={onSubmit}
-              formData={[{id: 123}]}
+              formData={formData[idx] || []}
               ref={jf => {
                 jsonFormRef[idx] = jf;
               }}

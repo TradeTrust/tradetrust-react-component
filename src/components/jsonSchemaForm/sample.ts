@@ -193,22 +193,50 @@ export const schema = [
   }
 ];
 
-
 export const data = [
   {
-    id: 123,
+    id: "123",
     name: "Demo Document",
     $template: {
       name: "Demo Template",
       url: "https://demo.com"
     },
-    issuers: [{
-      name: "Govtech",
-      documentStore: "0x48399Fb88bcD031C556F53e93F690EEC07963Af3",
-      identityProof: {
-        type: "DNS-TXT",
-        location: "demo-renderer.govtech.com"
+    issuers: [
+      {
+        name: "Govtech",
+        documentStore: "0x48399Fb88bcD031C556F53e93F690EEC07963Af3",
+        identityProof: {
+          type: "DNS-TXT",
+          location: "demo-renderer.govtech.com"
+        }
       }
-    }]
+    ],
+    consignee: {
+      name: "Demo Consignee",
+      type: "To the owner of"
+    },
+    notifyParty: {
+      name: "Demo Notify"
+    },
+    shipper: {
+      name: "Demo Shipper",
+      address: {
+        street: "One North",
+        country: "Singapore"
+      }
+    },
+    vessel: "1",
+    voyageNo: "001",
+    portOfLoading: "Singapore Port",
+    portOfDischarge: "China Port",
+    placeOfReceipt: "Beijing",
+    placeOfDelivery: "Singapore",
+    packages: [
+      {
+        description: "Green Apples",
+        weight: 20,
+        measurement: "100"
+      }
+    ]
   }
-]
+];
