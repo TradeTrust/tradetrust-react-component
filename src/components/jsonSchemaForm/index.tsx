@@ -9,7 +9,7 @@ interface JsonFormProps {
   onSubmit: ({ data }: any) => void;
 }
 
-const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
+export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
   const [activeTab, setActiveTab] = useState(0);
   const jsonFormRef: any = [];
   const onSubmit = ({ formData }: any): void => props.onSubmit(formData);
@@ -67,5 +67,3 @@ const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
     </>
   );
 };
-
-export default JsonSchemaForm;

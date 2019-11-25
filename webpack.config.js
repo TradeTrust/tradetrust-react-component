@@ -5,7 +5,7 @@ module.exports = {
     path: __dirname + "/build",
     filename: "index.js",
     libraryTarget: "umd",
-    library: "<please add the name of your library>"
+    library: "tradetrust-react-components"
   },
   externals: {
     react: "react"

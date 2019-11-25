@@ -1,5 +1,5 @@
 import React from "react";
-import JsonSchemaForm from "./";
+import { JsonSchemaForm } from "./";
 import { render, fireEvent, queryByAttribute } from "@testing-library/react";
 import { data } from "./sample";
 
