@@ -1,6 +1,6 @@
-# react-component-template
+# Tradetrust-react-component
 
-React component boilerplate.
+Tradetrust react components.
 
 ## Install
 
