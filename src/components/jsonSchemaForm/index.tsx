@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 interface JsonFormProps {
-  formData: object[];
+  formSchema: object[];
   onSubmit: ({ data }: any) => void;
 }
 
@@ -62,8 +62,8 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
 
   return (
     <>
-      {renderTabBar(props.formData)}
-      {renderJsonForm(props.formData)}
+      {renderTabBar(props.formSchema)}
+      {renderJsonForm(props.formSchema)}
     </>
   );
 };
