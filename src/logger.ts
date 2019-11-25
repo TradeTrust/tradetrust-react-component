@@ -1,6 +1,6 @@
 import debug from "debug";
 
-const logger = debug("PLACEHOLDER_PROJECT_NAME");
+const logger = debug("TradeTrust-React-Component:");
 
 interface Logger {
   trace: debug.Debugger;

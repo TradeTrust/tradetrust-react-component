@@ -1,6 +1,6 @@
 {
-  "name": "@govtechsg/react-component-template",
-  "version": "0.1.0",
+  "name": "@govtechsg/tradetrust-react-component",
+  "version": "0.0.1",
   "private": true,
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -172,7 +172,11 @@
   },
   "jest": {
     "coverageDirectory": "coverage",
-    "G": "node"
+    "G": "node",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "prettier": {
     "printWidth": 120

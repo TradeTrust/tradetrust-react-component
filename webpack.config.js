@@ -5,13 +5,13 @@ module.exports = {
     path: __dirname + "/build",
     filename: "index.js",
     libraryTarget: "umd",
-    library: "<please add the name of your library>"
+    library: "tradetrust-react-components"
   },
   externals: {
     react: "react"
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"]
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".css"]
   },
   module: {
     rules: [
@@ -21,6 +21,10 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.css$/,
+        loader: [ 'style-loader', 'css-loader' ]
       }
     ]
   }

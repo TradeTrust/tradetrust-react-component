@@ -1,30 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, ReactElement } from "react";
 import JsonForm from "react-jsonschema-form";
-import "./index.css";
+import { seperateUiSchema } from "./utils";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
-export const seperateUiSchema = (obj: any, schemaObj = {}) => {
-  const uiSchema: any = schemaObj;
-  Object.keys(obj).forEach(key => {
-    if (typeof obj[key] === "object" && obj[key] !== null) {
-      uiSchema[key] = {};
-      if (obj[key].ui) {
-        uiSchema[key] = obj[key].ui;
-      }
-      if (obj[key].properties) {
-        seperateUiSchema(obj[key].properties, uiSchema[key]);
-      }
-    }
-  });
-  return uiSchema;
-};
+interface JsonFormProps {
+  formData: object[];
+  onSubmit: ({ data }: any) => void;
+}
 
-const JsonSchemaForm = (props: any) => {
+export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
   const [activeTab, setActiveTab] = useState(0);
   const jsonFormRef: any = [];
-  const onSubmit = ({ formData }: any) => console.log("Data submitted: ", formData);
+  const onSubmit = ({ formData }: any): void => props.onSubmit(formData);
 
-  const renderTabBar = (jsonForms: any) => (
+  const renderTabBar = (jsonForms: any): ReactElement => (
     <nav>
       <div className="nav nav-tabs">
         {jsonForms.map((form: any, idx: number) => (
@@ -40,7 +30,7 @@ const JsonSchemaForm = (props: any) => {
     </nav>
   );
 
-  const renderJsonForm = (jsonForms: any) => (
+  const renderJsonForm = (jsonForms: any): ReactElement => (
     <>
       {jsonForms.map((form: any, idx: number) => {
         const uiSchema = seperateUiSchema(form.schema.properties);
@@ -60,7 +50,7 @@ const JsonSchemaForm = (props: any) => {
             >
               <div className="text-center">
                 <button type="button" className="btn btn-primary w-50" onClick={() => jsonFormRef[idx].submit()}>
-                  Issue
+                  Issue Document
                 </button>
               </div>
             </JsonForm>
@@ -77,5 +67,3 @@ const JsonSchemaForm = (props: any) => {
     </>
   );
 };
-
-export default JsonSchemaForm;

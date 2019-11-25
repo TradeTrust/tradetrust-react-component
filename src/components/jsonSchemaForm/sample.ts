@@ -66,7 +66,6 @@ export const data = [
               },
               documentStore: {
                 type: "string",
-                default: "0x48399Fb88bcD031C556F53e93F690EEC07963Af3",
                 pattern: "^0x[a-fA-F0-9]{40}$",
                 ui: {
                   "ui:placeholder": "Smart contract address of document store"
