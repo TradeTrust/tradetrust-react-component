@@ -1,7 +1,7 @@
 import { Meta, Preview, Props, Description, Story } from "@storybook/addon-docs/blocks";
 import { object } from "@storybook/addon-knobs";
 import { JsonSchemaForm } from "./";
-import { data } from "./sample";
+import { schema, data } from "./sample";
 
 <Meta title="MDX|JsonSchemaForm" component={JsonSchemaForm} />
 
@@ -19,7 +19,17 @@ With `MDX` we can define a story for `JsonSchemaForm` right in the middle of our
 markdown documentation.
 
 <Preview>
-  <Story name="with initial value">
-    <JsonSchemaForm formSchema={object("formSchema", data)} onSubmit={() => console.log("submit")} />
+  <Story name="with schema only">
+    <JsonSchemaForm formSchema={object("formSchema", schema)} onSubmit={({ formData }) => console.log(formData)} />
+  </Story>
+</Preview>
+
+<Preview>
+  <Story name="with schema and from data">
+    <JsonSchemaForm
+      formSchema={object("formSchema", schema)}
+      formData={object("formData", data)}
+      onSubmit={({ formData }) => console.log(formData)}
+    />
   </Story>
 </Preview>

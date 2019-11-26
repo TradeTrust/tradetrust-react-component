@@ -1,6 +1,6 @@
-# react-component-template
+# Tradetrust-react-component
 
-React component boilerplate.
+Tradetrust react components.
 
 ## Install
 
@@ -8,11 +8,13 @@ React component boilerplate.
 npm i @govtechsg/tradetrust-react-component
 ```
 
+
+
 ## Features
 
 ```
 import {JsonSchemaForm} from "@govtechsg/tradetrust-react-component"
 
-<JsonSchemaForm formSchema={<array of schemas>} onSubmit={() => console.log("submit")} />
+<JsonSchemaForm formSchema={<array of schemas>} formData={<array of data values>} onSubmit={({formData}) => console.log("submit")} />
 
 ```
