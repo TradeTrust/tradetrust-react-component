@@ -1,7 +1,8 @@
 import { seperateUiSchema } from "./utils";
 import { schema } from "./sample";
-describe("test", () => {
-  it("test", () => {
+
+describe("utility test to seperate ui schema", () => {
+  it("test with sample json schema", () => {
     const expectedOutput = {
       id: { "ui:autofocus": true, "ui:placeholder": "enter id for the document" },
       name: { "ui:placeholder": "enter name of the document" },
@@ -24,6 +25,49 @@ describe("test", () => {
       packages: { "ui:options": { orderable: false }, classNames: "item-pd-0" }
     };
     const out = seperateUiSchema(schema[0].schema.properties);
-    expect(out).toEqual(expectedOutput)
+    expect(out).toStrictEqual(expectedOutput);
+  });
+
+  it("should seperate ui schema when nested objects are there", () => {
+    const input = [
+      {
+        schema: {
+          properties: {
+            demo: {
+              type: "object",
+              properties: {
+                type: {
+                  type: "object",
+                  properties: {
+                    name: {
+                      type: "object",
+                      properties: {
+                        shipment: {
+                          type: "object",
+                          ui: {
+                            "ui:placeholder": "demo to test nested ui seperation"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ];
+    const expectedOutput = {
+      demo: {
+        type: {
+          name: {
+            shipment: { "ui:placeholder": "demo to test nested ui seperation" }
+          }
+        }
+      }
+    };
+    const out = seperateUiSchema(input[0].schema.properties);
+    expect(out).toStrictEqual(expectedOutput);
   });
 });

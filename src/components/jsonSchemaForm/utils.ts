@@ -1,13 +1,13 @@
-export const seperateUiSchema = (obj: any, schemaObj = {}): object => {
-  const uiSchema: any = schemaObj;
-  Object.keys(obj).forEach(key => {
-    if (typeof obj[key] === "object" && obj[key] !== null) {
+export const seperateUiSchema = (nestedObj: any, uiSchemaObj = {}): object => {
+  const uiSchema: any = uiSchemaObj;
+  Object.keys(nestedObj).forEach(key => {
+    if (typeof nestedObj[key] === "object" && nestedObj[key] !== null) {
       uiSchema[key] = {};
-      if (obj[key].ui) {
-        uiSchema[key] = obj[key].ui;
+      if (nestedObj[key].ui) {
+        uiSchema[key] = nestedObj[key].ui;
       }
-      if (obj[key].properties) {
-        seperateUiSchema(obj[key].properties, uiSchema[key]);
+      if (nestedObj[key].properties) {
+        seperateUiSchema(nestedObj[key].properties, uiSchema[key]);
       }
     }
   });

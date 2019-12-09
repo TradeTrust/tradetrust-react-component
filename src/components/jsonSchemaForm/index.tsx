@@ -7,6 +7,7 @@ import "./index.css";
 interface JsonFormProps {
   formData?: object[];
   formSchema: object[];
+  onSelectTab?: (index: number) => void;
   onSubmit: ({ data }: any) => void;
 }
 
@@ -22,7 +23,10 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
           <a
             key={idx}
             className={`nav-item nav-link ${activeTab === idx ? "active" : ""}`}
-            onClick={() => setActiveTab(idx)}
+            onClick={() => {
+              if (props.onSelectTab) props.onSelectTab(idx);
+              setActiveTab(idx);
+            }}
           >
             {form.name}
           </a>
