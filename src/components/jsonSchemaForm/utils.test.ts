@@ -30,24 +30,28 @@ describe("utility test to seperate ui schema", () => {
     expect(out).not.toStrictEqual(outputWithLessKeys);
   });
 
-  it("should seperate ui schema with expected output", () => {
+  it("should seperate ui schema with expected output when array items are there", () => {
     const expectedOutput = merge(outputWithLessKeys, {
       issuers: {
-        documentStore: {
-          "ui:placeholder": "Smart contract address of document store"
-        },
-        identityProof: {
-          location: {
-            "ui:placeholder": "Url of the website referencing to document store"
+        items: {
+          documentStore: {
+            "ui:placeholder": "Smart contract address of document store"
           },
-          type: {}
-        },
-        name: {}
+          identityProof: {
+            location: {
+              "ui:placeholder": "Url of the website referencing to document store"
+            },
+            type: {}
+          },
+          name: {}
+        }
       },
       packages: {
-        description: {},
-        measurement: {},
-        weight: { "ui:help": "in kg" }
+        items: {
+          description: {},
+          measurement: {},
+          weight: { "ui:help": "in kg" }
+        }
       }
     });
     const out = seperateUiSchema(schema[0].schema.properties);
