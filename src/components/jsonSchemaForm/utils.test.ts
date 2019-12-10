@@ -25,12 +25,12 @@ const outputWithLessKeys = {
 };
 
 describe("utility test to seperate ui schema", () => {
-  it("test with sample json schema", () => {
+  it("should seperate ui schema and should not equal to output with less keys ", () => {
     const out = seperateUiSchema(schema[0].schema.properties);
     expect(out).not.toStrictEqual(outputWithLessKeys);
   });
 
-  it("should seperate ui schema when nested objects are there", () => {
+  it("should seperate ui schema with expected output", () => {
     const expectedOutput = merge(outputWithLessKeys, {
       issuers: {
         documentStore: {
