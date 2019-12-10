@@ -1,12 +1,14 @@
 import React from "react";
 import { JsonSchemaForm } from "./";
 import { render, fireEvent, queryByAttribute } from "@testing-library/react";
-import { schema, data } from "./sample";
+import { FormProps } from "react-jsonschema-form";
+import { schema as mainSchema, data as mainData } from "./sample";
 
 const getById = queryByAttribute.bind(null, "id");
 const onSubmit = (formdata: any): any => formdata;
-
-const configData = [{ issuers: [{}] }];
+const schema = mainSchema as Array<FormProps<any>["schema"]>;
+const data = mainData as Array<FormProps<any>["formData"]>;
+const configData: Array<FormProps<any>["formData"]> = [{ issuers: [{}] }];
 
 describe("jsonSchemaForm component", () => {
   /* eslint jest/no-hooks: ["error", { "allow": ["beforeEach"] }] */

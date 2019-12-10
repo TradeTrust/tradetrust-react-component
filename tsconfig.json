@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "jsx": "react",
     "sourceMap": true,
+    "noImplicitAny": false,
     "types": ["jest", "@emotion/core", "node"]
   },
   "include": ["src"]

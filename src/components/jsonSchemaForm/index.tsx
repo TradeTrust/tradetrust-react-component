@@ -1,25 +1,28 @@
 import React, { useState, ReactElement } from "react";
-import JsonForm from "react-jsonschema-form";
+import JsonForm, { FormProps, UiSchema } from "react-jsonschema-form";
 import { seperateUiSchema } from "./utils";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
+type IJsonData = FormProps<undefined>["formData"];
+type IJsonSchema = FormProps<IJsonData>["schema"];
+
 interface JsonFormProps {
-  formData?: object[];
-  formSchema: object[];
+  formData?: Array<IJsonData>;
+  formSchema: Array<IJsonSchema>;
   onSelectTab?: (index: number) => void;
-  onSubmit: ({ data }: any) => void;
+  onSubmit: (formData: IJsonData) => void;
 }
 
 export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
   const [activeTab, setActiveTab] = useState(0);
-  const jsonFormRef: any = [];
-  const onSubmit = ({ formData }: any): void => props.onSubmit(formData);
+  const jsonFormRef: Array<JsonForm<undefined>> = [];
+  const onSubmit = ({ formData }: { formData: IJsonData }): void => props.onSubmit(formData);
 
-  const renderTabBar = ({ formSchema }: { formSchema: object[] }): ReactElement => (
+  const renderTabBar = ({ formSchema }: { formSchema: Array<IJsonSchema> }): ReactElement => (
     <nav>
       <div className="nav nav-tabs">
-        {formSchema.map((form: any, idx: number) => (
+        {formSchema.map((form: IJsonSchema, idx: number) => (
           <a
             key={idx}
             className={`nav-item nav-link ${activeTab === idx ? "active" : ""}`}
@@ -28,7 +31,7 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
               setActiveTab(idx);
             }}
           >
-            {form.name}
+            {form["name"]}
           </a>
         ))}
       </div>
@@ -39,26 +42,24 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
     formSchema,
     formData = []
   }: {
-    formSchema: object[];
-    formData?: object[];
+    formSchema: Array<IJsonSchema>;
+    formData?: Array<IJsonData>;
   }): ReactElement => (
     <>
-      {formSchema.map((form: any, idx: number) => {
-        const uiSchema = seperateUiSchema(form.schema.properties);
+      {formSchema.map((form: IJsonSchema, idx: number) => {
+        const uiSchema: UiSchema = seperateUiSchema(form["schema"].properties);
         return (
           <div
-            key={form.id}
-            id={form.id}
+            key={form["id"]}
+            id={form["id"]}
             className={`tab-pane p-3 bg-white ${activeTab === idx ? "d-block active" : "d-none"}`}
           >
             <JsonForm
-              schema={form.schema}
+              schema={form["schema"]}
               uiSchema={uiSchema}
               onSubmit={onSubmit}
-              formData={formData[idx] || []}
-              ref={jf => {
-                jsonFormRef[idx] = jf;
-              }}
+              formData={formData[idx]}
+              ref={(jfRef: JsonForm<undefined>) => (jsonFormRef[idx] = jfRef)}
             >
               <div className="text-center">
                 <button type="button" className="btn btn-primary w-50" onClick={() => jsonFormRef[idx].submit()}>
