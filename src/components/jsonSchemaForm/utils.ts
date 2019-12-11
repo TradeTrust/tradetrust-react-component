@@ -1,6 +1,10 @@
 import { UiSchema } from "react-jsonschema-form";
 
-export const seperateUiSchema = (nestedObj: object, uiSchemaObj: UiSchema = {}): UiSchema => {
+interface NestedObject {
+  [key: string]: any; // Add index signature
+}
+
+export const seperateUiSchema = (nestedObj: NestedObject, uiSchemaObj: UiSchema = {}): UiSchema => {
   const uiSchema: UiSchema = uiSchemaObj;
   Object.keys(nestedObj).forEach(key => {
     if (typeof nestedObj[key] === "object" && nestedObj[key] !== null) {
