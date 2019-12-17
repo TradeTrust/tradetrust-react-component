@@ -6,7 +6,7 @@ interface NestedObject {
 
 export const seperateUiSchema = (nestedObj: NestedObject, uiSchemaObj: UiSchema = {}): UiSchema => {
   const uiSchema: UiSchema = uiSchemaObj;
-  Object.keys(nestedObj).forEach(key => {
+  Object.keys(nestedObj).forEach((key: string) => {
     if (typeof nestedObj[key] === "object" && nestedObj[key] !== null) {
       uiSchema[key] = {};
       if (nestedObj[key].ui) {

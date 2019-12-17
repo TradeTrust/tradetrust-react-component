@@ -48,7 +48,7 @@ const expectedOutput = {
 
 describe("utility test to seperate ui schema", () => {
   it("should seperate ui schema with expected output", () => {
-    const out = seperateUiSchema(schema[0].schema.properties);
+    const out = seperateUiSchema(schema[0].properties);
     expect(out).toStrictEqual(expectedOutput);
   });
 });
