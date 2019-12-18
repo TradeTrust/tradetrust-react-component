@@ -10,11 +10,6 @@ const configData = [{ issuers: [{}] }];
 const schema = mainSchema as Array<CustomJsonSchema>;
 
 describe("jsonSchemaForm component", () => {
-  /* eslint jest/no-hooks: ["error", { "allow": ["beforeEach"] }] */
-  beforeEach(() => {
-    jest.spyOn(console, "error").mockImplementation(() => {});
-  });
-
   it("should render the form correctly", () => {
     const formSubmit = jest.fn();
     const { getByText } = render(<JsonSchemaForm formSchema={schema} onSubmit={formSubmit} />);
@@ -41,6 +36,7 @@ describe("jsonSchemaForm component", () => {
   });
 
   it("should throw error when submit form without required fields", () => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
     const { getByText } = render(<JsonSchemaForm formSchema={schema} onSubmit={formData => onSubmit(formData)} />);
     expect(getByText("Template Renderer")).toBeDefined();
     expect(getByText("Packages")).toBeDefined();

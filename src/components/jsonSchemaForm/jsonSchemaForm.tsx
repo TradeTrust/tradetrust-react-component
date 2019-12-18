@@ -33,7 +33,7 @@ export function JsonSchemaForm<T>(props: JsonFormProps<T>): ReactElement {
             key={idx}
             className={`nav-item nav-link ${activeTab === idx ? "active" : ""}`}
             onClick={() => {
-              props.onSelectTab?.(idx);
+              if (props.onSelectTab) props.onSelectTab(idx);
               setActiveTab(idx);
             }}
           >
