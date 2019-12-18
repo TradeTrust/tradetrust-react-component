@@ -31,7 +31,9 @@
   },
   "devDependencies": {
     "@babel/core": "7.5.5",
-    "@babel/plugin-proposal-optional-chaining": "7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
     "@babel/preset-env": "7.5.5",
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.3.3",
@@ -66,7 +68,7 @@
     "eslint-plugin-react-hooks": "2.0.1",
     "git-cz": "3.2.1",
     "jest": "24.9.0",
-    "prettier": "1.18.2",
+    "prettier": "1.19.1",
     "react": "16.9.0",
     "react-docgen-typescript-loader": "3.2.0",
     "react-dom": "16.9.0",
@@ -89,6 +91,11 @@
       "@babel/preset-typescript",
       "@babel/preset-react",
       "@emotion/babel-preset-css-prop"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      "@babel/plugin-proposal-optional-chaining",
+      "@babel/plugin-proposal-class-properties"
     ]
   },
   "browserslist": [
