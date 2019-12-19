@@ -1,6 +1,6 @@
 import React, { useState, ReactElement } from "react";
 import JsonForm, { FormProps, UiSchema } from "react-jsonschema-form";
-import { seperateUiSchema } from "./utils";
+import { separateUiSchema } from "./utils";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -53,7 +53,7 @@ export function JsonSchemaForm<T>(props: JsonFormProps<T>): ReactElement {
   }): ReactElement => (
     <>
       {formSchema.map((form: CustomJsonSchema, idx: number) => {
-        const uiSchema: UiSchema = seperateUiSchema(form.properties);
+        const uiSchema: UiSchema = separateUiSchema(form.properties);
         return (
           <div
             key={form.$id}

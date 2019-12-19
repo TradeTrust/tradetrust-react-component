@@ -1,7 +1,7 @@
-import { seperateUiSchema } from "./utils";
+import { separateUiSchema } from "./utils";
 import { schema } from "./sample";
 
-describe("utility test to seperate ui schema", () => {
+describe("utility test to separate ui schema", () => {
   it("should extract the json structure from the json schema and keep the ui keys", () => {
     const inputJsonSchema = schema[0].properties;
     const expectedResults = {
@@ -11,7 +11,7 @@ describe("utility test to seperate ui schema", () => {
         classNames: "item-pd-0",
         name: { "ui:placeholder": "Template name to be use by template renderer to determine the template to use" },
         type: {},
-        url: { "ui:placeholder": "URL of a decentralised renderer to render this document" }
+        url: { "ui:placeholder": "URL of a decentralized renderer to render this document" }
       },
       issuers: {
         "ui:options": { orderable: false },
@@ -48,11 +48,11 @@ describe("utility test to seperate ui schema", () => {
         }
       }
     };
-    const results = seperateUiSchema(inputJsonSchema);
+    const results = separateUiSchema(inputJsonSchema);
     expect(results).toStrictEqual(expectedResults);
   });
 
-  test("should work correctly with empty objects", () => {
+  it("should work correctly with empty objects", () => {
     const inputJsonSchema = {
       id: {}
     };
@@ -61,11 +61,11 @@ describe("utility test to seperate ui schema", () => {
       id: {}
     };
 
-    const results = seperateUiSchema(inputJsonSchema);
-    expect(results).toEqual(expectedResults);
+    const results = separateUiSchema(inputJsonSchema);
+    expect(results).toStrictEqual(expectedResults);
   });
 
-  test("should work correctly with array of strings at root level", () => {
+  it("should work correctly with array of strings at root level", () => {
     const inputJsonSchema = {
       type: "array",
       minItems: 2,
@@ -84,17 +84,15 @@ describe("utility test to seperate ui schema", () => {
     };
 
     const expectedResults = {
-      "ui:widget": "checkboxes",
-      "ui:options": {
-        inline: true
-      }
+      items: {},
+      ui: {}
     };
 
-    const results = seperateUiSchema(inputJsonSchema);
-    expect(results).toEqual(expectedResults);
+    const results = separateUiSchema(inputJsonSchema);
+    expect(results).toStrictEqual(expectedResults);
   });
 
-  test("should work with array of strings", () => {
+  it("should work with array of strings", () => {
     const inputJsonSchema = {
       bar: {
         type: "array",
@@ -110,17 +108,15 @@ describe("utility test to seperate ui schema", () => {
 
     const expectedResults = {
       bar: {
-        ui: {
-          "ui:widget": "checkboxes"
-        }
+        "ui:widget": "checkboxes"
       }
     };
 
-    const results = seperateUiSchema(inputJsonSchema);
-    expect(results).toEqual(expectedResults);
+    const results = separateUiSchema(inputJsonSchema);
+    expect(results).toStrictEqual(expectedResults);
   });
 
-  test("should work correctly with array of objects", () => {
+  it("should work correctly with array of objects", () => {
     const inputJsonSchema = {
       items: {
         type: "object",
@@ -144,8 +140,8 @@ describe("utility test to seperate ui schema", () => {
       }
     };
 
-    const results = seperateUiSchema(inputJsonSchema);
-    expect(results).toEqual(expectedResults);
+    const results = separateUiSchema(inputJsonSchema);
+    expect(results).toStrictEqual(expectedResults);
   });
 
   it("should work when there are no ui keys", () => {
@@ -160,8 +156,8 @@ describe("utility test to seperate ui schema", () => {
       id: {}
     };
 
-    const results = seperateUiSchema(inputJsonSchema);
-    expect(results).toEqual(expectedResults);
+    const results = separateUiSchema(inputJsonSchema);
+    expect(results).toStrictEqual(expectedResults);
   });
 
   it("should work when there is a sibling with no ui key", () => {
@@ -185,7 +181,49 @@ describe("utility test to seperate ui schema", () => {
       }
     };
 
-    const results = seperateUiSchema(inputJsonSchema);
-    expect(results).toEqual(expectedResults);
+    const results = separateUiSchema(inputJsonSchema);
+    expect(results).toStrictEqual(expectedResults);
+  });
+
+  it("should work when there is a fixed item array", () => {
+    const inputJsonSchema = {
+      fixedItemsList: {
+        type: "array",
+        title: "A list of fixed items",
+        items: [
+          {
+            title: "A string value",
+            type: "string",
+            default: "lorem ipsum",
+            ui: {
+              "ui:widget": "textarea"
+            }
+          },
+          {
+            title: "a boolean value",
+            type: "boolean",
+            ui: {
+              "ui:widget": "select"
+            }
+          }
+        ]
+      }
+    };
+
+    const expectedResults = {
+      fixedItemsList: {
+        items: [
+          {
+            "ui:widget": "textarea"
+          },
+          {
+            "ui:widget": "select"
+          }
+        ]
+      }
+    };
+
+    const results = separateUiSchema(inputJsonSchema);
+    expect(results).toStrictEqual(expectedResults);
   });
 });

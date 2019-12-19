@@ -4,7 +4,7 @@ interface NestedObject {
   [key: string]: any; // Add index signature
 }
 
-export const seperateUiSchema = (nestedObj: NestedObject, uiSchemaObj: UiSchema = {}): UiSchema => {
+export const separateUiSchema = (nestedObj: NestedObject, uiSchemaObj: UiSchema = {}): UiSchema => {
   const uiSchema: UiSchema = uiSchemaObj;
   Object.keys(nestedObj).forEach((key: string) => {
     if (typeof nestedObj[key] === "object" && nestedObj[key] !== null) {
@@ -12,12 +12,12 @@ export const seperateUiSchema = (nestedObj: NestedObject, uiSchemaObj: UiSchema 
       if (nestedObj[key].ui) {
         uiSchema[key] = nestedObj[key].ui;
       }
-      if (nestedObj[key].items) {
+      if (nestedObj[key].items && nestedObj[key].items.properties) {
         uiSchema[key].items = {};
-        seperateUiSchema(nestedObj[key].items.properties, uiSchema[key].items);
+        separateUiSchema(nestedObj[key].items.properties, uiSchema[key].items);
       }
       if (nestedObj[key].properties) {
-        seperateUiSchema(nestedObj[key].properties, uiSchema[key]);
+        separateUiSchema(nestedObj[key].properties, uiSchema[key]);
       }
     }
   });

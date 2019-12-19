@@ -41,7 +41,7 @@ export const schema = [
           url: {
             type: "string",
             ui: {
-              "ui:placeholder": "URL of a decentralised renderer to render this document"
+              "ui:placeholder": "URL of a decentralized renderer to render this document"
             }
           }
         },
