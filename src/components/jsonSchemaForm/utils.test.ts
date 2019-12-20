@@ -201,6 +201,10 @@ describe("utility test to separate ui schema", () => {
           },
           {
             title: "a boolean value",
+            type: "boolean"
+          },
+          {
+            title: "a boolean value",
             type: "boolean",
             ui: {
               "ui:widget": "select"
@@ -216,6 +220,7 @@ describe("utility test to separate ui schema", () => {
           {
             "ui:widget": "textarea"
           },
+          {},
           {
             "ui:widget": "select"
           }

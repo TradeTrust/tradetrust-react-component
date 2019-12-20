@@ -12,9 +12,17 @@ export const separateUiSchema = (nestedObj: NestedObject, uiSchemaObj: UiSchema 
       if (nestedObj[key].ui) {
         uiSchema[key] = nestedObj[key].ui;
       }
-      if (nestedObj[key].items && nestedObj[key].items.properties) {
-        uiSchema[key].items = {};
-        separateUiSchema(nestedObj[key].items.properties, uiSchema[key].items);
+      if (nestedObj[key].items) {
+        if (nestedObj[key].items.properties) {
+          uiSchema[key].items = {};
+          separateUiSchema(nestedObj[key].items.properties, uiSchema[key].items);
+        }
+        if (Array.isArray(nestedObj[key].items)) {
+          uiSchema[key].items = nestedObj[key].items.map((item: NestedObject) => {
+            if (item.ui) return item.ui;
+            return {};
+          });
+        }
       }
       if (nestedObj[key].properties) {
         separateUiSchema(nestedObj[key].properties, uiSchema[key]);
