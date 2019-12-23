@@ -108,6 +108,7 @@ describe("utility test to separate ui schema", () => {
 
     const expectedResults = {
       bar: {
+        items: {},
         "ui:widget": "checkboxes"
       }
     };
@@ -209,6 +210,21 @@ describe("utility test to separate ui schema", () => {
             ui: {
               "ui:widget": "select"
             }
+          },
+          {
+            title: "a boolean value",
+            type: "object",
+            properties: {
+              name: {
+                type: "string",
+                ui: {
+                  "ui:placeholder": "demo to test"
+                }
+              }
+            },
+            ui: {
+              "ui:placeholder": "select demo"
+            }
           }
         ]
       }
@@ -223,8 +239,53 @@ describe("utility test to separate ui schema", () => {
           {},
           {
             "ui:widget": "select"
+          },
+          {
+            "ui:placeholder": "select demo",
+            name: {
+              "ui:placeholder": "demo to test"
+            }
           }
         ]
+      }
+    };
+
+    const results = separateUiSchema(inputJsonSchema);
+    expect(results).toStrictEqual(expectedResults);
+  });
+
+  it("should work when there is a nested array", () => {
+    const inputJsonSchema = {
+      nestedArray: {
+        type: "array",
+        title: "A list of fixed items",
+        items: {
+          type: "array",
+          title: "second array list",
+          items: {
+            type: "object",
+            properties: {
+              name: {
+                type: "string",
+                ui: {
+                  "ui:placeholder": "dummy text"
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+
+    const expectedResults = {
+      nestedArray: {
+        items: {
+          items: {
+            name: {
+              "ui:placeholder": "dummy text"
+            }
+          }
+        }
       }
     };
 

@@ -7,19 +7,17 @@ interface NestedObject {
 export const separateUiSchema = (nestedObj: NestedObject, uiSchemaObj: UiSchema = {}): UiSchema => {
   const uiSchema: UiSchema = uiSchemaObj;
 
-  for (let [key, value] of Object.entries(nestedObj)) {
-    if (typeof value === "object" && value !== null) {
+  for (const [key, value] of Object.entries(nestedObj)) {
+    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
       uiSchema[key] = {};
       if (value.ui) {
         uiSchema[key] = value.ui;
       }
       if (value.items) {
+        uiSchema[key].items = Array.isArray(value.items) ? [] : {};
         if (value.items.properties) {
-          uiSchema[key].items = {};
           separateUiSchema(value.items.properties, uiSchema[key].items);
-        }
-        if (Array.isArray(value.items)) {
-          uiSchema[key].items = [];
+        } else {
           separateUiSchema(value.items, uiSchema[key].items);
         }
       }
