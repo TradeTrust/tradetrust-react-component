@@ -6,28 +6,27 @@ interface NestedObject {
 
 export const separateUiSchema = (nestedObj: NestedObject, uiSchemaObj: UiSchema = {}): UiSchema => {
   const uiSchema: UiSchema = uiSchemaObj;
-  Object.keys(nestedObj).forEach((key: string) => {
-    if (typeof nestedObj[key] === "object" && nestedObj[key] !== null) {
+
+  for (let [key, value] of Object.entries(nestedObj)) {
+    if (typeof value === "object" && value !== null) {
       uiSchema[key] = {};
-      if (nestedObj[key].ui) {
-        uiSchema[key] = nestedObj[key].ui;
+      if (value.ui) {
+        uiSchema[key] = value.ui;
       }
-      if (nestedObj[key].items) {
-        if (nestedObj[key].items.properties) {
+      if (value.items) {
+        if (value.items.properties) {
           uiSchema[key].items = {};
-          separateUiSchema(nestedObj[key].items.properties, uiSchema[key].items);
+          separateUiSchema(value.items.properties, uiSchema[key].items);
         }
-        if (Array.isArray(nestedObj[key].items)) {
-          uiSchema[key].items = nestedObj[key].items.map((item: NestedObject) => {
-            if (item.ui) return item.ui;
-            return {};
-          });
+        if (Array.isArray(value.items)) {
+          uiSchema[key].items = [];
+          separateUiSchema(value.items, uiSchema[key].items);
         }
       }
-      if (nestedObj[key].properties) {
-        separateUiSchema(nestedObj[key].properties, uiSchema[key]);
+      if (value.properties) {
+        separateUiSchema(value.properties, uiSchema[key]);
       }
     }
-  });
+  }
   return uiSchema;
 };
