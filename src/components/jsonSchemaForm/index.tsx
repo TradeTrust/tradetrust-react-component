@@ -58,7 +58,7 @@ export const JsonSchemaForm = (props: JsonFormProps): ReactElement => {
             >
               <div className="text-center">
                 <button type="button" className="btn btn-primary w-50" onClick={() => jsonFormRef[idx].submit()}>
-                  Issue Document
+                  Issue Bill of Lading
                 </button>
               </div>
             </JsonForm>

@@ -8,17 +8,17 @@ export const schema = [
       properties: {
         id: {
           type: "string",
-          title: "ID",
+          title: "Bill of Lading Number",
           ui: {
             "ui:autofocus": true,
-            "ui:placeholder": "enter id for the document"
+            "ui:placeholder": "Enter Bill of Lading Number for the document"
           }
         },
         name: {
           type: "string",
           title: "Name",
           ui: {
-            "ui:placeholder": "enter name of the document"
+            "ui:placeholder": "Enter name of the document"
           }
         },
         $template: {
@@ -30,17 +30,20 @@ export const schema = [
           properties: {
             name: {
               type: "string",
+              title: "Name",
               ui: {
                 "ui:placeholder": "Template name to be use by template renderer to determine the template to use"
               }
             },
             type: {
               type: "string",
+              title: "Type",
               default: "EMBEDDED_RENDERER",
               enum: ["EMBEDDED_RENDERER"]
             },
             url: {
               type: "string",
+              title: "URL",
               ui: {
                 "ui:placeholder": "URL of a decentralised renderer to render this document"
               }
@@ -99,10 +102,12 @@ export const schema = [
           },
           properties: {
             name: {
-              type: "string"
+              type: "string",
+              title: "Name"
             },
             type: {
-              type: "string"
+              type: "string",
+              title: "Type"
             }
           }
         },
@@ -114,7 +119,8 @@ export const schema = [
           },
           properties: {
             name: {
-              type: "string"
+              type: "string",
+              title: "Name"
             }
           }
         },
@@ -126,13 +132,21 @@ export const schema = [
           },
           properties: {
             name: {
-              type: "string"
+              type: "string",
+              title: "Name"
             },
             address: {
               type: "object",
+              title: "Address",
               properties: {
-                street: { type: "string" },
-                country: { type: "string" }
+                street: {
+                  type: "string",
+                  title: "Street"
+                },
+                country: {
+                  type: "string",
+                  title: "Country"
+                }
               }
             }
           }
