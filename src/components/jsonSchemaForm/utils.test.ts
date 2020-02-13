@@ -5,8 +5,8 @@ describe("utility test to separate ui schema", () => {
   it("should extract the json structure from the json schema and keep the ui keys", () => {
     const inputJsonSchema = schema[0].properties;
     const expectedResults = {
-      id: { "ui:autofocus": true, "ui:placeholder": "enter id for the document" },
-      name: { "ui:placeholder": "enter name of the document" },
+      id: { "ui:autofocus": true, "ui:placeholder": "Enter Bill of Lading Number for the document" },
+      name: { "ui:placeholder": "Enter name of the document" },
       $template: {
         classNames: "item-pd-0",
         name: { "ui:placeholder": "Template name to be use by template renderer to determine the template to use" },
@@ -44,7 +44,7 @@ describe("utility test to separate ui schema", () => {
         items: {
           description: {},
           measurement: {},
-          weight: { "ui:help": "in kg" }
+          weight: { "ui:help": "In kilograms (kg)" }
         }
       }
     };

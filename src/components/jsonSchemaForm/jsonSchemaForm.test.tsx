@@ -30,7 +30,7 @@ describe("jsonSchemaForm component", () => {
     fireEvent.change(idInput, { target: { value: "23" } });
     fireEvent.change(templateName, { target: { value: "Demo" } });
     fireEvent.change(identityLocation, { target: { value: "abc.com" } });
-    fireEvent.click(getByText(/Issue Document/i));
+    fireEvent.click(getByText(/Issue Bill of Lading/i));
 
     expect(formSubmit).toHaveBeenCalledTimes(1);
   });
@@ -40,7 +40,7 @@ describe("jsonSchemaForm component", () => {
     const { getByText } = render(<JsonSchemaForm formSchema={schema} onSubmit={formData => onSubmit(formData)} />);
     expect(getByText("Template Renderer")).toBeDefined();
     expect(getByText("Packages")).toBeDefined();
-    fireEvent.click(getByText(/Issue Document/i));
+    fireEvent.click(getByText(/Issue Bill of Lading/i));
     expect(getByText(".id is a required property")).toBeDefined();
     expect(getByText(".$template.name is a required property")).toBeDefined();
     expect(getByText(".issuers[0].identityProof.location is a required property")).toBeDefined();
