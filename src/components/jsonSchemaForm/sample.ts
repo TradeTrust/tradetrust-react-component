@@ -7,17 +7,17 @@ export const schema = [
     properties: {
       id: {
         type: "string",
-        title: "ID",
+        title: "Bill of Lading Number",
         ui: {
           "ui:autofocus": true,
-          "ui:placeholder": "enter id for the document"
+          "ui:placeholder": "Enter Bill of Lading Number for the document"
         }
       },
       name: {
         type: "string",
         title: "Name",
         ui: {
-          "ui:placeholder": "enter name of the document"
+          "ui:placeholder": "Enter name of the document"
         }
       },
       $template: {
@@ -29,17 +29,20 @@ export const schema = [
         properties: {
           name: {
             type: "string",
+            title: "Name",
             ui: {
               "ui:placeholder": "Template name to be use by template renderer to determine the template to use"
             }
           },
           type: {
             type: "string",
+            title: "Type",
             default: "EMBEDDED_RENDERER",
             enum: ["EMBEDDED_RENDERER"]
           },
           url: {
             type: "string",
+            title: "URL",
             ui: {
               "ui:placeholder": "URL of a decentralized renderer to render this document"
             }
@@ -61,10 +64,12 @@ export const schema = [
           type: "object",
           properties: {
             name: {
-              type: "string"
+              type: "string",
+              title: "Name"
             },
             documentStore: {
               type: "string",
+              title: "Document Store",
               pattern: "^0x[a-fA-F0-9]{40}$",
               ui: {
                 "ui:placeholder": "Smart contract address of document store"
@@ -72,14 +77,17 @@ export const schema = [
             },
             identityProof: {
               type: "object",
+              title: "Identity Proof",
               properties: {
                 type: {
                   type: "string",
+                  title: "Type",
                   default: "DNS-TXT",
                   enum: ["DNS-TXT"]
                 },
                 location: {
                   type: "string",
+                  title: "Location",
                   ui: {
                     "ui:placeholder": "Url of the website referencing to document store"
                   }
@@ -98,10 +106,12 @@ export const schema = [
         },
         properties: {
           name: {
-            type: "string"
+            type: "string",
+            title: "Name"
           },
           type: {
-            type: "string"
+            type: "string",
+            title: "Type"
           }
         }
       },
@@ -113,7 +123,8 @@ export const schema = [
         },
         properties: {
           name: {
-            type: "string"
+            type: "string",
+            title: "Name"
           }
         }
       },
@@ -125,13 +136,21 @@ export const schema = [
         },
         properties: {
           name: {
-            type: "string"
+            type: "string",
+            title: "Shipper"
           },
           address: {
             type: "object",
+            title: "Address",
             properties: {
-              street: { type: "string" },
-              country: { type: "string" }
+              street: {
+                type: "string",
+                title: "Street"
+              },
+              country: {
+                type: "string",
+                title: "Country"
+              }
             }
           }
         }
@@ -154,11 +173,11 @@ export const schema = [
       },
       placeOfReceipt: {
         type: "string",
-        title: "Place of receipt"
+        title: "Place of Receipt"
       },
       placeOfDelivery: {
         type: "string",
-        title: "Place of delivery"
+        title: "Place of Delivery"
       },
       packages: {
         type: "array",
@@ -173,16 +192,19 @@ export const schema = [
           type: "object",
           properties: {
             description: {
-              type: "string"
+              type: "string",
+              title: "Description"
             },
             weight: {
               type: "number",
+              title: "Weight",
               ui: {
-                "ui:help": "in kg"
+                "ui:help": "In kilograms (kg)"
               }
             },
             measurement: {
-              type: "string"
+              type: "string",
+              title: "Measurement"
             }
           }
         }
