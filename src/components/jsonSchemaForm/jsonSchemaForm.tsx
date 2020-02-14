@@ -7,7 +7,6 @@ import "./index.css";
 type JsonSchema = FormProps<any>["schema"];
 
 export interface CustomJsonSchema extends JsonSchema {
-  id: string | undefined;
   name: string;
   properties: {
     [k: string]: JsonSchema;
@@ -57,8 +56,8 @@ export function JsonSchemaForm<T>(props: JsonFormProps<T>): ReactElement {
         const uiSchema: UiSchema = separateUiSchema(form.properties);
         return (
           <div
-            key={form.id}
-            id={form.id}
+            key={idx}
+            id={form.$id}
             className={`tab-pane p-3 bg-white ${activeTab === idx ? "d-block active" : "d-none"}`}
           >
             <JsonForm

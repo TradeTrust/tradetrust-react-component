@@ -1,6 +1,6 @@
 export const schema = [
   {
-    id: "xyz",
+    $id: "xyz",
     name: "DEMO CNM",
     type: "object",
     required: ["id"],
