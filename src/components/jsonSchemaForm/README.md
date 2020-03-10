@@ -2,7 +2,7 @@
 
 Takes two params 
 
-    - nestedObj: object of value schema combined with ui schema 
+    - nestedObj: object of value schema combined with ui schema. it should contain one of the key `properties`, `items` or `ui`.
     - uiSchemaObj: ui schema object
 
 the structure of the nestedObj should be like this 
