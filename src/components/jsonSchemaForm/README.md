@@ -1,6 +1,7 @@
 # Util separateUiSchema
 
 Takes two params 
+
     - nestedObj: object of value schema combined with ui schema 
     - uiSchemaObj: ui schema object
 
