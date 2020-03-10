@@ -3,7 +3,7 @@
 Takes two params 
 
     - nestedObj: object of value schema combined with ui schema. it should contain one of the key `properties`, `items` or `ui`.
-    - uiSchemaObj: ui schema object
+    - uiSchemaObj: ui schema object. this object will be constructed with the util. 
 
 the structure of the nestedObj should be like this 
 
@@ -92,6 +92,66 @@ put type as an array and instead of key `properties` use key `items`.
                 } 
             }
         },
+    }
+}
+```
+
+
+Example 4 - With array properties 
+
+```
+{
+    $id: "abc"
+    name: "abc",
+    type: "object",
+    required: [""],
+    properties: { 
+        id: {
+                type: "array",
+                title: "A list of fixed items",
+                items: [
+                {
+                    title: "A string value",
+                    type: "string",
+                    default: "lorem ipsum",
+                    ui: {
+                        "ui:widget": "textarea"
+                    }
+                }]
+        }
+    }
+}
+```
+
+
+Example 5 - Nested Array 
+
+```
+{
+    $id: "abc"
+    name: "abc",
+    type: "object",
+    required: [""],
+    properties: { 
+        id: {
+            type: "array",
+            title: "A list of fixed items",
+            items: {
+                type: "array",
+                title: "second array list",
+                items: {
+                    type: "object",
+                    properties: {
+                        name: {
+                            type: "string",
+                            ui: {
+                                "ui:placeholder": "dummy text"
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 ```
